@@ -1,4 +1,4 @@
-influencer_id,influencer_main_genre,influencer_main_genre,influencer_active_start,follower_id,follower_main_genre,follower_main_genre,follower_active_start
+influencer_id,influencer_main_genre,influencer_main_genre_value,influencer_active_start,follower_id,follower_main_genre,follower_main_genre_value,follower_active_start
 759491,Pop/Rock,14,1980,74,Pop/Rock,14,1980
 25462,Electronic,8,1990,335,Pop/Rock,14,1990
 66915,Pop/Rock,14,1960,335,Pop/Rock,14,1990
