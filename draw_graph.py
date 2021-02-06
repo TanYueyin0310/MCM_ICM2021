@@ -12,16 +12,17 @@ with open('influence_data_processed.csv') as csvfile:
         follower = row['follower_id']
         connection = (influencer, follower)
         if not (influencer in nodelist):
-            G.add_node(influencer,genre = row['influencer_main_genre_value'],year = row['influencer_active_start'])
+            G.add_node(influencer, genre=row['influencer_main_genre_value'], year=row['influencer_active_start'])
             nodelist.append(influencer)
         if not (follower in nodelist):
-            G.add_node(follower,genre = row['follower_main_genre_value'],year =row['follower_active_start'])
+            G.add_node(follower, genre=row['follower_main_genre_value'], year=row['follower_active_start'])
             nodelist.append(follower)
-        G.add_edge(influencer,follower)
+        G.add_edge(influencer, follower)
 options = {
-    'node_size': 20,
-    'width': 0.3,
+    'node_size': 15,
+    'width': 0.1,
+    'arrowstyle': '->',
 }
-plt.figure(figsize=(15,9))
-nx.draw(G,**options)
+plt.figure(figsize=(15, 9))
+nx.draw(G, **options)
 plt.show()
