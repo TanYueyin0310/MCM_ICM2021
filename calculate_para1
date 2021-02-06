@@ -1,0 +1,14 @@
+import numpy as np
+from load_network import load_network
+import networkx as nx
+filename = 'influence_data.csv'
+G, nodelist = load_network(filename)
+nodes = G.nodes()
+for index in nodes:
+    outDegree = G.out_degree(index)
+    inDegree = G.in_degree(index)
+    if not inDegree == 0:
+        G.nodes[index]['para1'] = np.true_divide(outDegree,inDegree)
+    else:
+        G.nodes[index]['para1'] = outDegree
+G
