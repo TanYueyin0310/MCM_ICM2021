@@ -1,5 +1,7 @@
 import numpy as np
 from load_network import load_network
+import csv
+import codecs
 import networkx as nx
 
 filename = 'influence_data.csv'
@@ -29,3 +31,19 @@ for index3 in nodes:
         G.nodes[index3]['para3'] = 0
     else:
         G.nodes[index3]['para3'] = len(successor_genre_list)
+with open('result.csv', 'w',newline='') as csvfile:
+    #spamwriter = csv.writer(csvfile, delimiter=' ',quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    headers = ['artist','id', 'para1_degree', 'para2_duration', 'para3_genreDiversity', ]
+    result_writer = csv.writer(csvfile, dialect='excel')
+    result_writer.writerow(headers)
+    for node in G.nodes():
+        info = G.nodes[node]
+        test_info = [
+            info['name'],
+            info['id'],
+            info['para1'],
+            info['para2'],
+            info['para3']
+        ]
+        result_writer.writerow(test_info)
+
