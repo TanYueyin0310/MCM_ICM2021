@@ -16,14 +16,15 @@ for index1 in nodes:
         G.nodes[index1]['para1'] = outDegree
 for index2 in nodes:
     successor2 = [*G.successors(index2)]
-    successor_year_list = [int(G.nodes[i]['year']) for i in successor2]
+    successor_year_list = np.array([int(G.nodes[i]['year']) for i in successor2])
     # for successor in [*G.successors(index2)]:
     influencer_year = int(G.nodes[index2]['year'])
     if not successor2:
         G.nodes[index2]['para2'] = 0
     else:
-        lastest_follower_year = np.max(successor_year_list)
-        G.nodes[index2]['para2'] = lastest_follower_year - influencer_year
+        # lastest_follower_year = np.max(successor_year_list)
+        G.nodes[index2]['para2'] = np.true_divide(np.sum(successor_year_list - influencer_year),
+                                                  len(successor_year_list))
 for index3 in nodes:
     successor3 = [*G.successors(index3)]
     successor_genre_list = np.unique([G.nodes[i]['genre'] for i in successor3])
@@ -31,9 +32,9 @@ for index3 in nodes:
         G.nodes[index3]['para3'] = 0
     else:
         G.nodes[index3]['para3'] = len(successor_genre_list)
-with open('result.csv', 'w',newline='') as csvfile:
-    #spamwriter = csv.writer(csvfile, delimiter=' ',quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    headers = ['artist','id', 'para1_degree', 'para2_duration', 'para3_genreDiversity', ]
+with open('result.csv', 'w', newline='') as csvfile:
+    # spamwriter = csv.writer(csvfile, delimiter=' ',quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    headers = ['artist', 'id', 'para1_degree', 'para2_duration', 'para3_genreDiversity', ]
     result_writer = csv.writer(csvfile, dialect='excel')
     result_writer.writerow(headers)
     for node in G.nodes():
@@ -46,4 +47,3 @@ with open('result.csv', 'w',newline='') as csvfile:
             info['para3']
         ]
         result_writer.writerow(test_info)
-
